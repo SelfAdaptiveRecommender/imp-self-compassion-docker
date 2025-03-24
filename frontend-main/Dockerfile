@@ -9,6 +9,7 @@ RUN npm run build
 # Production stage
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Using default nginx configuration since routing is handled by Apache2 on the host
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

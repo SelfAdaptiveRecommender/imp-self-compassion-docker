@@ -1,16 +1,26 @@
+# Docker compose file for Mindful Self-Compassion application
+# Note: This requires Apache2 configuration on the host system
+# The application will be accessible via:
+# - Frontend: https://your-domain.com/
+# - Backend API: https://your-domain.com/api
+
 version: '3.8'
 
 services:
   frontend:
     image: davidfhnw/mindful-self-compassion-frontend:latest
     ports:
-      - "127.0.0.1:80:80"
+      - "127.0.0.1:3000:80"  # Only accessible from localhost
     depends_on:
       - backend
 
   backend:
     image: davidfhnw/mindful-self-compassion-backend:latest
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8080:8080"  # Only accessible from localhost
     environment:
-      - SPRING_PROFILES_ACTIVE=prod 
+      - SPRING_PROFILES_ACTIVE=prod
+      # Add any additional environment variables needed for production
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/dbname
+      # - SPRING_DATASOURCE_USERNAME=user
+      # - SPRING_DATASOURCE_PASSWORD=password 
