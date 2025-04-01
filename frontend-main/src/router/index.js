@@ -78,8 +78,10 @@ const routes = [
   },
 ]
 
+// Use the publicPath as the base for the router
+// This is critical for running the app under a sub-path like /self-compassion/
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory('/self-compassion/'),
   routes
 })
 
