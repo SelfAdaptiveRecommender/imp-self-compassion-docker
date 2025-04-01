@@ -10,16 +10,25 @@ services:
   frontend:
     image: davidfhnw/mindful-self-compassion-frontend:latest
     ports:
-      - "127.0.0.1:3000:80"  # Only accessible from localhost
+      - "8081:80"  # Accessible from any IP
+    env_file:
+      - .env
     depends_on:
       - backend
 
   backend:
     image: davidfhnw/mindful-self-compassion-backend:latest
     ports:
-      - "127.0.0.1:8080:8080"  # Only accessible from localhost
+      - "8080:8080"  # Accessible from any IP
+    env_file:
+      - .env
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+      - CORS_ALLOWED_METHODS=${CORS_ALLOWED_METHODS}
+      - CORS_ALLOWED_HEADERS=${CORS_ALLOWED_HEADERS}
+      - CORS_ALLOW_CREDENTIALS=${CORS_ALLOW_CREDENTIALS}
+      - CORS_MAX_AGE=${CORS_MAX_AGE}
       # Add any additional environment variables needed for production
       # - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/dbname
       # - SPRING_DATASOURCE_USERNAME=user

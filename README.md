@@ -16,6 +16,7 @@ nano .env
 ```bash
 # Frontend Configuration
 VUE_APP_BACKEND_URL=http://your-domain.com/api
+VUE_APP_PUBLIC_PATH=/self-compassion/
 
 # Backend Configuration
 SPRING_PROFILES_ACTIVE=prod
@@ -33,18 +34,16 @@ services:
   frontend:
     image: davidfhnw/mindful-self-compassion-frontend:latest
     ports:
-      - "127.0.0.1:8081:80"  # Only accessible from localhost on port 8081
+      - "8081:80"  # Accessible from any IP
     env_file:
       - .env
-    environment:
-      - VUE_APP_BACKEND_URL=${VUE_APP_BACKEND_URL}
     depends_on:
       - backend
 
   backend:
     image: davidfhnw/mindful-self-compassion-backend:latest
     ports:
-      - "127.0.0.1:8080:8080"  # Only accessible from localhost
+      - "8080:8080"  # Accessible from any IP
     env_file:
       - .env
     environment:
@@ -72,19 +71,19 @@ Create new Config file at /etc/apache2/sites-available/mindful-self-compassion.c
     LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
     
     # Backend API proxy - make sure this comes BEFORE the frontend proxy
-    ProxyPass /api/ http://127.0.0.1:8080/api/
-    ProxyPassReverse /api/ http://127.0.0.1:8080/api/
+    ProxyPass /self-compassion/api/ http://127.0.0.1:8080/api/
+    ProxyPassReverse /self-compassion/api/ http://127.0.0.1:8080/api/
     
     # Frontend proxy
     ProxyPreserveHost On
-    ProxyPass / http://127.0.0.1:8081/
-    ProxyPassReverse / http://127.0.0.1:8081/
+    ProxyPass /self-compassion/ http://127.0.0.1:8081/
+    ProxyPassReverse /self-compassion/ http://127.0.0.1:8081/
     
     # WebSocket support
     RewriteEngine On
     RewriteCond %{HTTP:Upgrade} websocket [NC]
     RewriteCond %{HTTP:Connection} upgrade [NC]
-    RewriteRule ^/?(.*) "ws://127.0.0.1:8081/$1" [P,L]
+    RewriteRule ^/self-compassion/?(.*) "ws://127.0.0.1:8081/$1" [P,L]
     
     # Basic security headers
     Header always set X-Frame-Options "SAMEORIGIN"
@@ -119,8 +118,8 @@ sudo systemctl restart apache2
 
 1. Replace `your-domain.com` with your actual domain name in all configuration files
 2. This setup uses HTTP only - all traffic will be unencrypted
-3. The backend API will be accessible at `http://your-domain.com/api`
-4. The frontend will be accessible at `http://your-domain.com` (proxied through Apache to port 8081)
+3. The backend API will be accessible at `http://your-domain.com/self-compassion/api`
+4. The frontend will be accessible at `http://your-domain.com/self-compassion` (proxied through Apache to port 8081)
 5. If using a firewall, ensure ports 80 (for Apache) and 8081 (for frontend) are open
 
 ## Admin Credentials  
