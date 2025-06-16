@@ -26,7 +26,7 @@ Create a `.env` file in the application directory:
 nano .env
 ```
 
-Add the following content, updating the domain as needed:
+Adapt the following content, and replace `your-doman.com`
 
 ```
 # Frontend Configuration
@@ -101,7 +101,7 @@ Create a Nginx configuration file:
 sudo nano /etc/nginx/sites-available/mindful-self-compassion.conf
 ```
 
-Add the following content, updating the `server_name` with your domain:
+Add the following content, update `your-domain.com` 
 
 ```nginx
 server {
@@ -136,7 +136,7 @@ server {
         add_header 'Access-Control-Allow-Credentials' 'true';
     }
 
-    # Frontend proxy - IMPORTANT: this will proxy all requests under /self-compassion/
+    # Frontend proxy - IMPORTANT: this will proxy all requests
     location /self-compassion/ {
         proxy_pass http://127.0.0.1:8081/;
         proxy_http_version 1.1;
@@ -177,10 +177,10 @@ sudo systemctl restart nginx
 ```bash
 # Pull the Docker images
 cd /home/your-user/mindful-self-compassion-app
-docker compose pull
+sudo docker compose pull
 
 # Start the containers
-docker compose up -d
+sudo docker compose up -d
 ```
 
 ## 6. Verify Deployment
