@@ -224,7 +224,7 @@ docker compose logs backend
 docker compose logs -f
 ```
 
-## 8. Additional Security (Optional)
+## 8. Additional Security (highly recommended)
 
 ### Enable HTTPS
 
