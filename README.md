@@ -2,12 +2,12 @@
 
 This guide provides step-by-step instructions for deploying the Mindful Self-Compassion application on a production server, specifically under the path `/self-compassion/`.
 
-## Prerequisites
+## System Requirements
 
-- Ubuntu/Debian-based server
-- Docker and Docker Compose installed
-- Nginx installed
-- Root or sudo access
+- Ubuntu 24.04.2 LTS 
+- Docker v27.5.1
+- Docker Compose v2.32.4 installed
+- Nginx 1.24.0
 
 ## 1. Create Application Directory Structure
 
