@@ -1,5 +1,26 @@
-# Mindful Self-Compassion App - Production Deployment Guide
+# Mindful Self-Compassion App
 
+## Tech Stack
+### Frontend:
+- Vue.js v3.2.13
+- Bootstrap v5.3.3
+- Vue Router v4.0.3
+- Axios v1.6.8
+- Node.js v23.7.0
+
+### Backend:
+- Java v17
+- Spring Boot v3.2.3
+- H2 Database
+
+Infrastructure:
+Docker & Docker Compose 3.8
+Apache2
+Node.js
+
+
+
+# Deployment
 This guide provides step-by-step instructions for deploying the Mindful Self-Compassion application on a production server, specifically under the path `/self-compassion/`.
 
 ## System Requirements
