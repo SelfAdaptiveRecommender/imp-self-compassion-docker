@@ -13,13 +13,6 @@
 - Spring Boot v3.2.3
 - H2 Database
 
-Infrastructure:
-Docker & Docker Compose 3.8
-Apache2
-Node.js
-
-
-
 # Deployment
 This guide provides step-by-step instructions for deploying the Mindful Self-Compassion application on a production server, specifically under the path `/self-compassion/`.
 
